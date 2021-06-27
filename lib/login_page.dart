@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:syariah/main_page.dart';
 
 class LoginPage extends StatefulWidget {
+  bool isOn = false;
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -25,17 +27,20 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SafeArea(
               child: Container(
-            color: Color(0xFF1F1D2B),
+            color: widget.isOn ? Colors.grey : Color(0xFF1F1D2B),
             child: ListView(
               padding: EdgeInsets.all(24),
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
+                    Switch(
+                        value: widget.isOn,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.isOn = value;
+                          });
+                        }),
                     SizedBox(
                       height: 130,
                     ),
@@ -72,14 +77,17 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextField(
                         controller: phoneController,
                         keyboardType: TextInputType.number,
-                        autofocus: true,
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
-                          icon: Icon(Icons.contact_phone_rounded),
+                          icon: Icon(
+                            Icons.contact_phone_rounded,
+                            color: Colors.white,
+                          ),
                           disabledBorder: InputBorder.none,
                           fillColor: Color(0xff6C5ECF),
                           hintText: "Nomor Handphone",
                           hintStyle: TextStyle(
-                            color: Color(0xff6C5ECF),
+                            color: Colors.white,
                           ),
                         ),
                       ),
